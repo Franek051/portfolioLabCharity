@@ -2,11 +2,11 @@ package pl.coderslab.charity.institution;
 
 import lombok.Getter;
 import lombok.Setter;
+import pl.coderslab.charity.donation.Donation;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
+
 @Getter
 @Setter
 @Entity
@@ -18,4 +18,7 @@ public class Institution {
     private String name;
 
     private String description;;
+
+    @OneToMany(mappedBy = "institution")
+    private Set<Donation> donations;
 }
