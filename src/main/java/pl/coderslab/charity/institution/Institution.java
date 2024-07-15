@@ -1,4 +1,4 @@
-package pl.coderslab.charity.category;
+package pl.coderslab.charity.institution;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -10,13 +10,15 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-public class Category {
+public class Institution {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
 
-    @ManyToMany(mappedBy = "categories")
+    private String description;;
+
+    @OneToMany(mappedBy = "institution")
     private Set<Donation> donations;
 }
