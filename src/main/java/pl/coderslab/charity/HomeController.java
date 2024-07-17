@@ -30,6 +30,9 @@ public class HomeController {
         Integer totalQuantity = donationRepository.findTotalQuantity();
         model.addAttribute("totalQuantity", totalQuantity);
 
+        Integer allDonations = donationRepository.countAllDonations();
+        model.addAttribute("allDonations", allDonations);
+
         return "index";
     }
 }
