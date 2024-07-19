@@ -163,7 +163,57 @@ document.addEventListener("DOMContentLoaded", function() {
       this.$stepInstructions[0].parentElement.parentElement.hidden = this.currentStep >= 5;
       this.$step.parentElement.hidden = this.currentStep >= 5;
 
-      // TODO: get data from inputs and show them in summary
+      if (this.currentStep === 5) {
+        this.fillSummary();
+      }
+
+    }
+
+    fillSummary() {
+      // Mapowanie kategorii
+      const categories = Array.from(document.querySelectorAll('input[name="categories"]:checked'))
+          .map(el => {
+            const description = el.closest('label').querySelector('.description');
+            if (description) {
+              return description.innerText;
+            } else {
+              console.warn('Description element not found for category', el);
+              return 'Brak opisu';
+            }
+          })
+          .join(', ');
+
+      // Mapowanie instytucji
+      const institutionInput = document.querySelector('input[name="institution"]:checked');
+      let institution = 'Brak instytucji';
+      if (institutionInput) {
+        const institutionTitle = institutionInput.closest('label').querySelector('.title');
+        if (institutionTitle) {
+          institution = institutionTitle.innerText;
+        } else {
+          console.warn('Title element not found for institution', institutionInput);
+        }
+      } else {
+        console.warn('No institution selected');
+      }
+
+      // Mapowanie adresu i terminu odbioru
+      const street = document.querySelector('input[name="street"]').value;
+      const city = document.querySelector('input[name="city"]').value;
+      const zipCode = document.querySelector('input[name="zipCode"]').value;
+      const pickUpDate = document.querySelector('input[name="pickUpDate"]').value;
+      const pickUpTime = document.querySelector('input[name="pickUpTime"]').value;
+      const pickUpComment = document.querySelector('textarea[name="pickUpComment"]').value || 'Brak uwag';
+
+      // Ustawianie wartości w podsumowaniu
+      document.getElementById('summary-items').innerText = categories;
+      document.getElementById('summary-institution').innerText = institution;
+      document.getElementById('summary-street').innerText = street;
+      document.getElementById('summary-city').innerText = city;
+      document.getElementById('summary-zipcode').innerText = zipCode;
+      document.getElementById('summary-pickup-date').innerText = pickUpDate;
+      document.getElementById('summary-pickup-time').innerText = pickUpTime;
+      document.getElementById('summary-pickup-comment').innerText = pickUpComment;
     }
 
   }
