@@ -6,11 +6,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import pl.coderslab.charity.category.Category;
+
 import pl.coderslab.charity.category.CategoryRepository;
 import pl.coderslab.charity.institution.InstitutionRepository;
-import pl.coderslab.charity.donation.Donation;
-import java.util.List;
+;
 
 
 @Controller
