@@ -1,17 +1,14 @@
 package pl.coderslab.charity.user;
-
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
 @Controller
 public class UserController {
 
-    private UserRepository userRepository;
+    private UserService userService;
 
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
@@ -21,7 +18,14 @@ public class UserController {
 
     @PostMapping("/register")
     public String registerUser(@ModelAttribute User user) {
-        userRepository.save(user);
-        return "redirect:/register";
+        userService.saveUser(user);
+        return "redirect:/login";
     }
+
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+
+
 }
