@@ -18,6 +18,7 @@ import pl.coderslab.charity.user.SpringDataUserDetailsService;
 public class SecurityConfig  {
 
 
+
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -27,16 +28,19 @@ public class SecurityConfig  {
     @Bean
     protected SecurityFilterChain configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                    .antMatchers("/", "/register", "/login").permitAll()
                     .antMatchers("/form").authenticated()
-                    .anyRequest().permitAll()
                     .and()
                 .formLogin()
                     .loginPage("/login")
-                .   permitAll()
+                    .usernameParameter("email")
+                    .permitAll()
                     .and()
                 .logout()
                     .logoutSuccessUrl("/")
                     .permitAll();
         return http.build();
     }
+
+
 }
